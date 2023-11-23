@@ -13,18 +13,22 @@ import {
 import { bodyParts } from "../constants";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 
 const BodyParts = () => {
+  const router = useRouter();
   const BodyPartCard = ({ item, index }) => {
     return (
       <View>
         <TouchableOpacity
+          onPress={() =>
+            router.push({ pathname: "/exercises", params: { item } })
+          }
           style={{ width: wp(44), height: wp(52) }}
           className="flex justify-end p-4 mb-4"
         >
-          <Text>hel</Text>
           <Image
-            source={item.image}
+            source={item?.image}
             resizeMode="cover"
             className="rounded-[35px] absolute"
             style={{ width: wp(44), height: wp(52) }}
@@ -36,6 +40,12 @@ const BodyParts = () => {
             end={{ x: 0.5, y: 1 }}
             className="absolute bottom-0 rounded-b-[35px]"
           />
+          <Text
+            style={{ fontSize: hp(2.3) }}
+            className="text-white font-semibold text-center tracking-wide"
+          >
+            {item?.name}
+          </Text>
         </TouchableOpacity>
       </View>
     );
